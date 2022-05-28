@@ -1,0 +1,33 @@
+{% extends 'nota/index.html' %}
+
+{% block content %}
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            {% for coluna in colunas%}
+            <th scope="col">{{coluna}}</th>
+            {% endfor%}
+      </tr>
+    </thead>
+    <tbody>
+        {%for aluno in alunos%}
+        <tr>
+            <td>{{aluno.nome}}</td>
+            <td>{{aluno.turma}}</td>
+            <td>{{aluno.prova1}}</td>
+            <td>{{aluno.lista1}}/12</td>
+            <td>{{aluno.lista2}}/23</td>
+            <td>{{aluno.prova2}}</td>
+            <td>{{aluno.lista3}}/9</td>
+            <td>{{aluno.lista4}}/14</td>
+            <td>{{aluno.prova3}}</td>
+            <td>{{aluno.lista5}}/29</td>
+            <td>{{aluno.lista6}}/11</td>
+            <td>{{aluno.prova4}}</td>
+            <td>{{aluno.lista7}}/12</td>
+            <td>{{aluno.lista8}}/14</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

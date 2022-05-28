@@ -1,0 +1,34 @@
+{% extends 'nota/index.html' %}
+
+{% block content %}
+<div class="row" style="padding-left: 20px; padding-top: 20px;">
+    <div class="column" style="padding-left: 30px; padding-top: 20px; width: 300px; height: 200px; border: solid 1px; border-radius: 20px 20px 20px 20px; background-color: black;">
+        <center>
+            <a style="color: white;">AB1</a>
+        </center>
+        <br>
+        <button type="button" class="btn btn-success"><a style="color: aliceblue;" href="{% url 'importp1' %}">Prova 1</a></button>
+        <button type="button" class="btn btn-success"><a style="color: aliceblue;" href="{% url 'importl1' %}">Lista 1</a></button>
+        <button type="button" class="btn btn-success"><a style="color: aliceblue;" href="{% url 'importl2' %}">Lista 2</a></button>
+        <br><br>
+        <button type="button" class="btn btn-success"><a style="color: aliceblue;" href="{% url 'importp2' %}">Prova 2</a></button>
+        <button type="button" class="btn btn-success"><a style="color: aliceblue;" href="{% url 'importl3' %}">Lista 3</a></button>
+        <button type="button" class="btn btn-success"><a style="color: aliceblue;" href="{% url 'importl4' %}">Lista 4</a></button>
+    </div>
+    <div class="column" style="width: 10px;"></div>
+      
+    <div class="column" style="padding-left: 30px; padding-top: 20px; width: 300px; height: 200px; border: solid 1px; border-radius: 20px 20px 20px 20px; background-color: black;">
+        <center>
+            <a style="color: white;">AB2</a>
+        </center>
+        <br>
+        <button type="button" class="btn btn-success"><a style="color: aliceblue;" href="{% url 'importp3' %}">Prova 3</a></button>
+        <button type="button" class="btn btn-success"><a style="color: aliceblue;" href="{% url 'importl5' %}">Lista 5</a></button>
+        <button type="button" class="btn btn-success"><a style="color: aliceblue;" href="{% url 'importl6' %}">Lista 6</a></button>
+        <br><br>
+        <button type="button" class="btn btn-success"><a style="color: aliceblue;" href="{% url 'importp4' %}">Prova 4</a></button>
+        <button type="button" class="btn btn-success"><a style="color: aliceblue;" href="{% url 'importl7' %}">Lista 7</a></button>
+        <button type="button" class="btn btn-success"><a style="color: aliceblue;" href="{% url 'importl8' %}">Lista 8</a></button>
+    </div>
+</div>
+{% endblock %}
