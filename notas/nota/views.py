@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Aluno, NotaAluno
 from django.contrib import messages
 import pandas as pd
-from decimal import *
+from django.contrib.auth.decorators import user_passes_test
 
 
 def index(request):
@@ -33,6 +33,7 @@ def notasAcumuladas(request):
 
     return render(request, 'nota/notas.html', data)
 
+@user_passes_test(lambda u: u.is_superuser)
 def importation(request):
     return render(request, 'nota/import.html')
 
@@ -51,6 +52,7 @@ def tratando_nota(new_aluno):
     
     return dados
 
+@user_passes_test(lambda u: u.is_superuser)
 def importProva1(request):
     if request.method == 'POST':
         new_aluno = request.FILES['myfile']
@@ -72,6 +74,7 @@ def importProva1(request):
 
     return render(request, 'nota/importP1.html')
 
+@user_passes_test(lambda u: u.is_superuser)
 def importProva2(request):
     if request.method == 'POST':
         new_aluno = request.FILES['myfile']
@@ -93,6 +96,7 @@ def importProva2(request):
 
     return render(request, 'nota/importP2.html')
 
+@user_passes_test(lambda u: u.is_superuser)
 def importProva3(request):
     if request.method == 'POST':
         new_aluno = request.FILES['myfile']
@@ -114,6 +118,7 @@ def importProva3(request):
 
     return render(request, 'nota/importP3.html')
 
+@user_passes_test(lambda u: u.is_superuser)
 def importProva4(request):
     if request.method == 'POST':
         new_aluno = request.FILES['myfile']
@@ -135,6 +140,7 @@ def importProva4(request):
 
     return render(request, 'nota/importP4.html')
 
+@user_passes_test(lambda u: u.is_superuser)
 def importLista1(request):
     if request.method == 'POST':
         new_aluno = request.FILES['myfile']
@@ -156,6 +162,7 @@ def importLista1(request):
 
     return render(request, 'nota/importL1.html')
 
+@user_passes_test(lambda u: u.is_superuser)
 def importLista2(request):
     if request.method == 'POST':
         new_aluno = request.FILES['myfile']
@@ -177,6 +184,7 @@ def importLista2(request):
 
     return render(request, 'nota/importL2.html')
 
+@user_passes_test(lambda u: u.is_superuser)
 def importLista3(request):
     if request.method == 'POST':
         new_aluno = request.FILES['myfile']
@@ -198,6 +206,7 @@ def importLista3(request):
 
     return render(request, 'nota/importL3.html')
 
+@user_passes_test(lambda u: u.is_superuser)
 def importLista4(request):
     if request.method == 'POST':
         new_aluno = request.FILES['myfile']
@@ -219,6 +228,7 @@ def importLista4(request):
 
     return render(request, 'nota/importL4.html')
 
+@user_passes_test(lambda u: u.is_superuser)
 def importLista5(request):
     if request.method == 'POST':
         new_aluno = request.FILES['myfile']
@@ -240,6 +250,7 @@ def importLista5(request):
 
     return render(request, 'nota/importL5.html')
 
+@user_passes_test(lambda u: u.is_superuser)
 def importLista6(request):
     if request.method == 'POST':
         new_aluno = request.FILES['myfile']
@@ -261,6 +272,7 @@ def importLista6(request):
 
     return render(request, 'nota/importL6.html')
 
+@user_passes_test(lambda u: u.is_superuser)
 def importLista7(request):
     if request.method == 'POST':
         new_aluno = request.FILES['myfile']
@@ -282,6 +294,7 @@ def importLista7(request):
 
     return render(request, 'nota/importL7.html')
 
+@user_passes_test(lambda u: u.is_superuser)
 def importLista8(request):
     if request.method == 'POST':
         new_aluno = request.FILES['myfile']
@@ -320,6 +333,7 @@ def calcularMedia(dados, index):
 
     aluno.save()
 
+@user_passes_test(lambda u: u.is_superuser)
 def importReav(request):
     if request.method == 'POST':
         new_aluno = request.FILES['myfile']
@@ -359,6 +373,7 @@ def calcularFinal(dados, index):
 
     aluno.save()
 
+@user_passes_test(lambda u: u.is_superuser)
 def importFinal(request):
     if request.method == 'POST':
         new_aluno = request.FILES['myfile']
@@ -384,6 +399,7 @@ def importFinal(request):
 
     return render(request, 'nota/importFinal.html')
 
+@user_passes_test(lambda u: u.is_superuser)
 def calcularAB1(request):
     if request.method == 'POST':
         alunos = Aluno.objects.all()
@@ -400,6 +416,7 @@ def calcularAB1(request):
 
     return render(request, 'nota/calcularAB1.html')
 
+@user_passes_test(lambda u: u.is_superuser)
 def calcularAB2(request):
     if request.method == 'POST':
         alunos = Aluno.objects.all()
