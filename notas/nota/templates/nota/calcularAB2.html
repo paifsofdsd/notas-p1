@@ -20,9 +20,8 @@
   </div>
 
 </nav>
-<form method="post" enctype="multipart/form-data">
+<form id="AB1" method="post">
     {% csrf_token %}
-    <input type="file" name="myfile">
-    <button type="submit">upload</button>
+    <button class="btn btn-success" type="submit">Calcular AB2</button>
 </form>
 {% endblock %}

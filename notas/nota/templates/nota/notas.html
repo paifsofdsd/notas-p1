@@ -1,7 +1,8 @@
 {% extends 'nota/index.html' %}
 
 {% block content %}
-<form action="{% url 'searchindividual' %}" method="POST" class="form-inline my-2 my-lg-0">
+
+<form action="{% url 'searchgeral' %}" method="POST" class="form-inline my-2 my-lg-0">
     {% csrf_token %}
     <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar nome..." name="search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
@@ -33,19 +34,19 @@
         {%for aluno in alunos%}
         <tr>
             <td>{{aluno.nome}}</td>
-            <td>{{aluno.turma}}</td>
-            <td>{{aluno.prova1}}</td>
-            <td>{{aluno.lista1}}/12</td>
-            <td>{{aluno.lista2}}/23</td>
-            <td>{{aluno.prova2}}</td>
-            <td>{{aluno.lista3}}/9</td>
-            <td>{{aluno.lista4}}/14</td>
-            <td>{{aluno.prova3}}</td>
-            <td>{{aluno.lista5}}/29</td>
-            <td>{{aluno.lista6}}/11</td>
-            <td>{{aluno.prova4}}</td>
-            <td>{{aluno.lista7}}/12</td>
-            <td>{{aluno.lista8}}/14</td>
+            <td>{{aluno.ab1}}</td>
+            <td>{{aluno.ab2}}</td>
+            <td>{{aluno.reav}}</td>
+            <td>{{aluno.final}}</td>
+            <td>{{aluno.mediaFinal}}</td>
+            {%if aluno.situacao == 'APROVADO' %} 
+            <td style="background-color: green;">{{aluno.situacao}}</td>
+            {% elif aluno.situacao == 'REPROVADO' %}
+            <td style="background-color: red;">{{aluno.situacao}}</td>
+            {% else %}
+            <td style="background-color: yellow;">{{aluno.situacao}}</td>
+            {% endif %}
+
         </tr>
         {% endfor %}
     </tbody>
