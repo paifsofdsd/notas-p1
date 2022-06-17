@@ -399,6 +399,12 @@ def importFinal(request):
 
     return render(request, 'nota/importFinal.html')
 
+def calcularMediaFinal(aluno):
+    alunoF = NotaAluno.objects.get(nome = aluno.nome)
+    alunoF.mediaFinal = round(((alunoF.ab1 + alunoF.ab2)/2), 2)
+    print(alunoF.mediaFinal)
+    alunoF.save()
+
 @user_passes_test(lambda u: u.is_superuser)
 def calcularAB1(request):
     if request.method == 'POST':
@@ -414,6 +420,9 @@ def calcularAB1(request):
                 alunoF = NotaAluno(nome = aluno.nome, ab1 = notaAB1)
                 alunoF.save()
 
+            calcularMediaFinal(aluno)
+            
+
     return render(request, 'nota/calcularAB1.html')
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -425,10 +434,16 @@ def calcularAB2(request):
             try:
                 alunoF = NotaAluno.objects.get(nome = aluno.nome)
                 alunoF.ab2 = round(((((aluno.prova3 + aluno.prova4)*7)/20) + (((aluno.lista5 + aluno.lista6 + aluno.lista7 + aluno.lista8)*3)/66)), 2)
+                alunoF.mediaFinal = round( ((alunoF.ab1 + alunoF.ab2)/2), 2)
+                if alunoF.mediaFinal >= 7:
+                    alunoF.situacao = 'APROVADO'
                 alunoF.save()
             except:
                 notaAB2 = round(((((aluno.prova3 + aluno.prova4)*7)/20) + (((aluno.lista5 + aluno.lista6 + aluno.lista7 + aluno.lista8)*3)/66)), 2)
                 alunoF = NotaAluno(nome = aluno.nome, ab1 = notaAB2)
+                alunoF.mediaFinal = round( ((alunoF.ab1 + alunoF.ab2)/2), 2)
+                if alunoF.mediaFinal >= 7:
+                    alunoF.situacao = 'APROVADO'
                 alunoF.save()
 
     return render(request, 'nota/calcularAB2.html')
