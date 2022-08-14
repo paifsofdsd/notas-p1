@@ -25,7 +25,7 @@ def resolution(request):
 def notasAcumuladas(request):
 
     data = {}
-    colunas = ('Nome', 'AB1', 'AB2', 
+    colunas = ('Nome', 'Turma', 'AB1', 'AB2', 
     'Reav', 'Final', 'Média', 'Situação',)
 
     data['alunos'] = NotaAluno.objects.all()

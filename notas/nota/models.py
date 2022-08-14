@@ -28,6 +28,8 @@ class Aluno(models.Model):
 
 class NotaAluno(models.Model):
     nome = models.CharField(max_length=100)
+    turma = models.CharField(null=True, max_length=2)
+    
     ab1 = models.DecimalField(default=0.0, max_digits=4, decimal_places=2)
     ab2 = models.DecimalField(default=0.0, max_digits=4, decimal_places=2)
     reav = models.DecimalField(default=0.0, max_digits=4, decimal_places=2)
