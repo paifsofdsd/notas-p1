@@ -452,7 +452,11 @@ def searchNotaIndividual(request):
     if request.method == 'POST':
         search = request.POST['search']
 
-        result_search = Aluno.objects.filter(nome__contains=search)
+        if request.POST['select'] == 'nome':
+            result_search = Aluno.objects.filter(nome__contains=search)
+        elif request.POST['select'] == 'turma':
+            result_search = Aluno.objects.filter(turma=search.upper())
+            
         dados = {}
         colunas = ('Nome', 'Turma', 'Prova 1', 
         'Lista 1', 'Lista 2', 'Prova 2', 'Lista 3',
