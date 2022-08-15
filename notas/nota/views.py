@@ -17,7 +17,14 @@ def resolution(request):
     'Lista 4', 'Prova 3', 'Lista 5', 'Lista 6',
     'Prova 4', 'Lista 7', 'Lista 8')
 
-    data['alunos'] = Aluno.objects.all()
+    lista = []
+    for i in Aluno.objects.all():
+        i.nome = i.nome.title()
+        lista.append(i)
+
+    alunos_ordenados = sorted(lista, key = lambda x: x.nome)
+
+    data['alunos'] = alunos_ordenados
     data['colunas'] = colunas
 
     return render(request, 'nota/resolution.html', data)
@@ -28,7 +35,14 @@ def notasAcumuladas(request):
     colunas = ('Nome', 'Turma', 'AB1', 'AB2', 
     'Reav', 'Final', 'Média', 'Situação',)
 
-    data['alunos'] = NotaAluno.objects.all()
+    lista = []
+    for i in NotaAluno.objects.all():
+        i.nome = i.nome.title()
+        lista.append(i)
+
+    alunos_ordenados = sorted(lista, key = lambda x: x.nome)
+
+    data['alunos'] = alunos_ordenados
     data['colunas'] = colunas
 
     return render(request, 'nota/notas.html', data)
@@ -463,7 +477,14 @@ def searchNotaIndividual(request):
         'Lista 4', 'Prova 3', 'Lista 5', 'Lista 6',
         'Prova 4', 'Lista 7', 'Lista 8')
 
-        dados['alunos'] = result_search
+        lista = []
+        for i in result_search:
+            i.nome = i.nome.title()
+            lista.append(i)
+
+        alunos_ordenados = sorted(lista, key = lambda x: x.nome)
+
+        dados['alunos'] = alunos_ordenados
         dados['colunas'] = colunas
         
         return render(request, 'nota/resolution.html', dados)
@@ -483,7 +504,14 @@ def searchNotaGeral(request):
         colunas = ('Nome', 'Turma', 'AB1', 'AB2', 
         'Reav', 'Final', 'Média', 'Situação',)
 
-        dados['alunos'] = result_search
+        lista = []
+        for i in result_search:
+            i.nome = i.nome.title()
+            lista.append(i)
+
+        alunos_ordenados = sorted(lista, key = lambda x: x.nome)
+
+        dados['alunos'] = alunos_ordenados
         dados['colunas'] = colunas
         
         return render(request, 'nota/notas.html', dados)
