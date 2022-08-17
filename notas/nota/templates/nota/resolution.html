@@ -29,7 +29,7 @@
     <thead class="thead-dark">
         <tr>
             {% for coluna in colunas%}
-            <th scope="col">{{coluna}}</th>
+            <th class="center" scope="col">{{coluna}}</th>
             {% endfor%}
       </tr>
     </thead>
@@ -37,19 +37,19 @@
         {%for aluno in alunos%}
         <tr>
             <td>{{aluno.nome}}</td>
-            <td>{{aluno.turma}}</td>
-            <td>{{aluno.prova1}}</td>
-            <td onmousemove="nota(event)" class="tt" data-bs-placement="bottom" title="">{{aluno.lista1}}/12</td>
-            <td onmouseover="nota(event)" class="tt" data-bs-placement="bottom" title="">{{aluno.lista2}}/23</td>
-            <td>{{aluno.prova2}}</td>
-            <td onmouseover="nota(event)" class="tt" data-bs-placement="bottom" title="">{{aluno.lista3}}/9</td>
-            <td onmouseover="nota(event)" class="tt" data-bs-placement="bottom" title="">{{aluno.lista4}}/14</td>
-            <td>{{aluno.prova3}}</td>
-            <td onmouseover="nota(event)" class="tt" data-bs-placement="bottom" title="">{{aluno.lista5}}/29</td>
-            <td onmouseover="nota(event)" class="tt" data-bs-placement="bottom" title="">{{aluno.lista6}}/11</td>
-            <td>{{aluno.prova4}}</td>
-            <td onmouseover="nota(event)" class="tt" data-bs-placement="bottom" title="">{{aluno.lista7}}/12</td>
-            <td onmouseover="nota(event)" class="tt" data-bs-placement="bottom" title="">{{aluno.lista8}}/14</td>
+            <td class="center">{{aluno.turma}}</td>
+            <td class="center">{{aluno.prova1}}</td>
+            <td onmousemove="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista1}}/12</td>
+            <td onmouseover="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista2}}/23</td>
+            <td class="center">{{aluno.prova2}}</td>
+            <td onmouseover="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista3}}/9</td>
+            <td onmouseover="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista4}}/14</td>
+            <td class="center">{{aluno.prova3}}</td>
+            <td onmouseover="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista5}}/29</td>
+            <td onmouseover="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista6}}/11</td>
+            <td class="center">{{aluno.prova4}}</td>
+            <td onmouseover="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista7}}/12</td>
+            <td onmouseover="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista8}}/14</td>
         </tr>
         {% endfor %}
     </tbody>
