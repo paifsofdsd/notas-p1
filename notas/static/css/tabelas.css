@@ -1,0 +1,8 @@
+thead > tr > th {
+    position: sticky;
+    top: -1;
+}
+
+.center{
+    text-align: center;
+}
