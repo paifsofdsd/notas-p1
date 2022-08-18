@@ -39,51 +39,36 @@
             <td>{{aluno.nome}}</td>
             <td class="center">{{aluno.turma}}</td>
             <td class="center">{{aluno.prova1}}</td>
-            <td onmousemove="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista1}}/12</td>
-            <td onmouseover="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista2}}/23</td>
+            <td onmouseover="notaListaAB1(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista1}}/12</td>
+            <td onmouseover="notaListaAB1(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista2}}/23</td>
             <td class="center">{{aluno.prova2}}</td>
-            <td onmouseover="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista3}}/9</td>
-            <td onmouseover="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista4}}/14</td>
+            <td onmouseover="notaListaAB1(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista3}}/9</td>
+            <td onmouseover="notaListaAB1(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista4}}/14</td>
             <td class="center">{{aluno.prova3}}</td>
-            <td onmouseover="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista5}}/29</td>
-            <td onmouseover="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista6}}/11</td>
+            <td onmouseover="notaListaAB2(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista5}}/29</td>
+            <td onmouseover="notaListaAB2(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista6}}/11</td>
             <td class="center">{{aluno.prova4}}</td>
-            <td onmouseover="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista7}}/12</td>
-            <td onmouseover="nota(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista8}}/14</td>
+            <td onmouseover="notaListaAB2(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista7}}/12</td>
+            <td onmouseover="notaListaAB2(event)" class="tt center" data-bs-placement="bottom" title="">{{aluno.lista8}}/14</td>
         </tr>
         {% endfor %}
     </tbody>
   </table>
   <script>
-    const tooltips = document.querySelectorAll('.tt')
+    const tooltips = document.querySelectorAll('.tt');
+
     tooltips.forEach(t => {
-      new bootstrap.Tooltip(t)
+        new bootstrap.Tooltip(t);
     })
 
-    function nota(e) {
-      var valores = e.target.innerText.split('/')
-      e.target.dataset.originalTitle = (valores[0] / 58 * 3).toFixed(2).toString() + ' pontos'
+    function notaListaAB1(e) {
+        var valores = e.target.innerText.split('/');
+        e.target.dataset.originalTitle = (valores[0] / 58 * 3).toFixed(2).toString() + ' pontos';
     }
 
-    function trocarPesquisa(e){
-      if(e.target.value == 'turma') {
-        var nome = document.querySelector('#nome');
-        var turma = document.querySelector('#turma');
-
-        e.target.nextElementSibling.placeholder = 'Pesquisar turma...'
-
-        nome.classList.remove('selected');
-        turma.classList.add('selected');
-      }
-      else{
-        var nome = document.querySelector('#nome');
-        var turma = document.querySelector('#turma');
-
-        e.target.nextElementSibling.placeholder = 'Pesquisar nome...'
-
-        turma.classList.remove('selected');
-        nome.classList.add('selected');
-      }
+    function notaListaAB2(e) {
+        var valores = e.target.innerText.split('/');
+        e.target.dataset.originalTitle = (valores[0] / 66 * 3).toFixed(2).toString() + ' pontos';
     }
   </script>
 {% endblock %}
