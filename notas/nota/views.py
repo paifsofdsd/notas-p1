@@ -10,7 +10,7 @@ def index(request):
     return redirect('resolution')
 
 def resolution(request):
-
+    print( lambda u: u.is_superuser )
     data = {}
     colunas = ('Nome', 'Turma', 'Prova 1', 
     'Lista 1', 'Lista 2', 'Prova 2', 'Lista 3',
@@ -67,74 +67,9 @@ def tratando_nota(new_aluno):
     return dados
 
 @user_passes_test(lambda u: u.is_superuser)
-def importProva1(request):
+def importProva(request):
     if request.method == 'POST':
-        new_aluno = request.FILES['myfile']
-
-        if not new_aluno.name.endswith('xls'):
-            messages.info(request, 'wrong format')
-            return render(request, 'nota/importP1.html')
-
-        dados = tratando_nota(new_aluno)
-
-        for i in range(len(dados[0])):
-            try:
-                aluno = Aluno.objects.get(nome=dados[0][i])
-                aluno.prova1 = dados[1][i]
-                aluno.save()
-            except:
-                aluno = Aluno(nome = dados[0][i], prova1 = dados[1][i])
-                aluno.save()
-
-    return render(request, 'nota/importP1.html')
-
-@user_passes_test(lambda u: u.is_superuser)
-def importProva2(request):
-    if request.method == 'POST':
-        new_aluno = request.FILES['myfile']
-
-        if not new_aluno.name.endswith('xls'):
-            messages.info(request, 'wrong format')
-            return render(request, 'nota/importP2.html')
-
-        dados = tratando_nota(new_aluno)
-        
-        for i in range(len(dados[0])):
-            try:
-                aluno = Aluno.objects.get(nome=dados[0][i])
-                aluno.prova2 = dados[1][i]
-                aluno.save()
-            except:
-                aluno = Aluno(nome = dados[0][i], prova2 = dados[1][i])
-                aluno.save()
-
-    return render(request, 'nota/importP2.html')
-
-@user_passes_test(lambda u: u.is_superuser)
-def importProva3(request):
-    if request.method == 'POST':
-        new_aluno = request.FILES['myfile']
-
-        if not new_aluno.name.endswith('xls'):
-            messages.info(request, 'wrong format')
-            return render(request, 'nota/importP3.html')
-
-        dados = tratando_nota(new_aluno)
-        
-        for i in range(len(dados[0])):
-            try:
-                aluno = Aluno.objects.get(nome=dados[0][i])
-                aluno.prova3 = dados[1][i]
-                aluno.save()
-            except:
-                aluno = Aluno(nome = dados[0][i], prova3 = dados[1][i])
-                aluno.save()
-
-    return render(request, 'nota/importP3.html')
-
-@user_passes_test(lambda u: u.is_superuser)
-def importProva4(request):
-    if request.method == 'POST':
+        requested_test = request.POST['prova']
         new_aluno = request.FILES['myfile']
 
         if not new_aluno.name.endswith('xls'):
@@ -146,17 +81,19 @@ def importProva4(request):
         for i in range(len(dados[0])):
             try:
                 aluno = Aluno.objects.get(nome=dados[0][i])
-                aluno.prova4 = dados[1][i]
+                setattr(aluno, requested_test, dados[1][i])
                 aluno.save()
             except:
-                aluno = Aluno(nome = dados[0][i], prova4 = dados[1][i])
+                aluno = Aluno(nome = dados[0][i])
+                setattr(aluno, requested_test, dados[1][i])
                 aluno.save()
 
-    return render(request, 'nota/importP4.html')
+    return render(request, 'nota/importP'+request.path[-2]+'.html')
 
 @user_passes_test(lambda u: u.is_superuser)
-def importLista1(request):
+def importLista(request):
     if request.method == 'POST':
+        requested_list = request.POST['lista']
         new_aluno = request.FILES['myfile']
 
         if not new_aluno.name.endswith('xls'):
@@ -168,167 +105,14 @@ def importLista1(request):
         for i in range(len(dados[0])):
             try:
                 aluno = Aluno.objects.get(nome=dados[0][i])
-                aluno.lista1 = dados[1][i]
+                setattr(aluno, requested_list, dados[1][i])
                 aluno.save()
             except:
-                aluno = Aluno(nome = dados[0][i], lista1 = dados[1][i])
+                aluno = Aluno(nome = dados[0][i])
+                setattr(aluno, requested_list, dados[1][i])
                 aluno.save()
 
-    return render(request, 'nota/importL1.html')
-
-@user_passes_test(lambda u: u.is_superuser)
-def importLista2(request):
-    if request.method == 'POST':
-        new_aluno = request.FILES['myfile']
-
-        if not new_aluno.name.endswith('xls'):
-            messages.info(request, 'wrong format')
-            return render(request, 'nota/importL2.html')
-
-        dados = tratando_nota(new_aluno)
-
-        for i in range(len(dados[0])):
-            try:
-                aluno = Aluno.objects.get(nome=dados[0][i])
-                aluno.lista2 = dados[1][i]
-                aluno.save()
-            except:
-                aluno = Aluno(nome = dados[0][i], lista2 = dados[1][i])
-                aluno.save()
-
-    return render(request, 'nota/importL2.html')
-
-@user_passes_test(lambda u: u.is_superuser)
-def importLista3(request):
-    if request.method == 'POST':
-        new_aluno = request.FILES['myfile']
-
-        if not new_aluno.name.endswith('xls'):
-            messages.info(request, 'wrong format')
-            return render(request, 'nota/importL3.html')
-
-        dados = tratando_nota(new_aluno)
-
-        for i in range(len(dados[0])):
-            try:
-                aluno = Aluno.objects.get(nome=dados[0][i])
-                aluno.lista3 = dados[1][i]
-                aluno.save()
-            except:
-                aluno = Aluno(nome = dados[0][i], lista3 = dados[1][i])
-                aluno.save()
-
-    return render(request, 'nota/importL3.html')
-
-@user_passes_test(lambda u: u.is_superuser)
-def importLista4(request):
-    if request.method == 'POST':
-        new_aluno = request.FILES['myfile']
-
-        if not new_aluno.name.endswith('xls'):
-            messages.info(request, 'wrong format')
-            return render(request, 'nota/importL4.html')
-
-        dados = tratando_nota(new_aluno)
-
-        for i in range(len(dados[0])):
-            try:
-                aluno = Aluno.objects.get(nome=dados[0][i])
-                aluno.lista4 = dados[1][i]
-                aluno.save()
-            except:
-                aluno = Aluno(nome = dados[0][i], lista4 = dados[1][i])
-                aluno.save()
-
-    return render(request, 'nota/importL4.html')
-
-@user_passes_test(lambda u: u.is_superuser)
-def importLista5(request):
-    if request.method == 'POST':
-        new_aluno = request.FILES['myfile']
-
-        if not new_aluno.name.endswith('xls'):
-            messages.info(request, 'wrong format')
-            return render(request, 'nota/importL5.html')
-
-        dados = tratando_nota(new_aluno)
-
-        for i in range(len(dados[0])):
-            try:
-                aluno = Aluno.objects.get(nome=dados[0][i])
-                aluno.lista5 = dados[1][i]
-                aluno.save()
-            except:
-                aluno = Aluno(nome = dados[0][i], lista5 = dados[1][i])
-                aluno.save()
-
-    return render(request, 'nota/importL5.html')
-
-@user_passes_test(lambda u: u.is_superuser)
-def importLista6(request):
-    if request.method == 'POST':
-        new_aluno = request.FILES['myfile']
-
-        if not new_aluno.name.endswith('xls'):
-            messages.info(request, 'wrong format')
-            return render(request, 'nota/importL6.html')
-
-        dados = tratando_nota(new_aluno)
-
-        for i in range(len(dados[0])):
-            try:
-                aluno = Aluno.objects.get(nome=dados[0][i])
-                aluno.lista6 = dados[1][i]
-                aluno.save()
-            except:
-                aluno = Aluno(nome = dados[0][i], lista6 = dados[1][i])
-                aluno.save()
-
-    return render(request, 'nota/importL6.html')
-
-@user_passes_test(lambda u: u.is_superuser)
-def importLista7(request):
-    if request.method == 'POST':
-        new_aluno = request.FILES['myfile']
-
-        if not new_aluno.name.endswith('xls'):
-            messages.info(request, 'wrong format')
-            return render(request, 'nota/importL7.html')
-
-        dados = tratando_nota(new_aluno)
-
-        for i in range(len(dados[0])):
-            try:
-                aluno = Aluno.objects.get(nome=dados[0][i])
-                aluno.lista7 = dados[1][i]
-                aluno.save()
-            except:
-                aluno = Aluno(nome = dados[0][i], lista7 = dados[1][i])
-                aluno.save()
-
-    return render(request, 'nota/importL7.html')
-
-@user_passes_test(lambda u: u.is_superuser)
-def importLista8(request):
-    if request.method == 'POST':
-        new_aluno = request.FILES['myfile']
-
-        if not new_aluno.name.endswith('xls'):
-            messages.info(request, 'wrong format')
-            return render(request, 'nota/importL8.html')
-
-        dados = tratando_nota(new_aluno)
-
-        for i in range(len(dados[0])):
-            try:
-                aluno = Aluno.objects.get(nome=dados[0][i])
-                aluno.lista8 = dados[1][i]
-                aluno.save()
-            except:
-                aluno = Aluno(nome = dados[0][i], lista8 = dados[1][i])
-                aluno.save()
-
-    return render(request, 'nota/importL8.html')
+    return render(request, 'nota/importL'+request.path[-2]+'.html')
 
 def calcularMedia(dados, index):
     aluno = NotaAluno.objects.get(nome = dados[0][index])

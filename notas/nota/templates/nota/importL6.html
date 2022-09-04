@@ -23,6 +23,7 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="file" name="myfile">
+    <input type="text" value="lista6" name="lista" style="display: none;">
     <button type="submit">upload</button>
 </form>
 {% endblock %}
